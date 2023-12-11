@@ -60,8 +60,7 @@ public class XmlReaderRestController {
 //            }
         doc.getDocumentElement().normalize();
         Map<String, String> map = new HashMap<>();
-        Set<Counter> countSet = new HashSet<>();
-        traverseXML(doc.getDocumentElement(), map, "", -1, null, countSet);
+        traverseXML(doc.getDocumentElement(), map, "", -1, null);
         for (Map.Entry<String, String> entry : map.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
@@ -70,9 +69,7 @@ public class XmlReaderRestController {
     }
 
     private Integer traverseXML(Node node, Map<String, String> nodeMap, String parent,
-                                    Integer index, String currentParentNodeArray, Set<Counter> countSet) {
-//        int currentIndex = index;
-//        String currentParentNodeArray = currentParentNode;
+                                    Integer index, String currentParentNodeArray) {
         if (node.getNodeType() == Node.ELEMENT_NODE) {
             String nodeName = node.getNodeName();
             String key = parent.isEmpty() ? nodeName : parent + "." + nodeName;
@@ -90,7 +87,7 @@ public class XmlReaderRestController {
                         }
                         currentParentNodeArray = key;
                     }
-                    index = traverseXML(childNode, nodeMap, key, index, currentParentNodeArray, countSet);
+                    index = traverseXML(childNode, nodeMap, key, index, currentParentNodeArray);
                 }
             }
         }else {
