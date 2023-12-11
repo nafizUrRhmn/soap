@@ -1,6 +1,7 @@
 package com.soap.restcontroller;
 
 import com.soap.errorhandler.XmlErrorHandler;
+import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.ResourceUtils;
@@ -31,9 +32,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.StringReader;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @RestController
 public class XmlReaderRestController {
@@ -61,7 +60,8 @@ public class XmlReaderRestController {
 //            }
         doc.getDocumentElement().normalize();
         Map<String, String> map = new HashMap<>();
-        traverseXML(doc.getDocumentElement(), map, "", -1, null);
+        Set<Counter> countSet = new HashSet<>();
+        traverseXML(doc.getDocumentElement(), map, "", -1, null, countSet);
         for (Map.Entry<String, String> entry : map.entrySet()) {
             System.out.println(entry.getKey() + ": " + entry.getValue());
         }
@@ -69,8 +69,8 @@ public class XmlReaderRestController {
 
     }
 
-    private static Integer traverseXML(Node node, Map<String, String> nodeMap, String parent,
-                                    Integer index, String currentParentNodeArray) {
+    private Integer traverseXML(Node node, Map<String, String> nodeMap, String parent,
+                                    Integer index, String currentParentNodeArray, Set<Counter> countSet) {
 //        int currentIndex = index;
 //        String currentParentNodeArray = currentParentNode;
         if (node.getNodeType() == Node.ELEMENT_NODE) {
@@ -82,10 +82,15 @@ public class XmlReaderRestController {
                 for (int i = 0; i < nodeList.getLength(); i++) {
                     Node childNode = nodeList.item(i);
                     if (key.endsWith("LL")) {
-                        index = index>0 ? index : 0;
+                        if(currentParentNodeArray!=null && currentParentNodeArray.equals(key)){
+                            int count = index+1;
+                            nodeMap.put(key+".size", count+"");
+                        }else{
+                            index =0;
+                        }
                         currentParentNodeArray = key;
                     }
-                    index = traverseXML(childNode, nodeMap, key, index, currentParentNodeArray);
+                    index = traverseXML(childNode, nodeMap, key, index, currentParentNodeArray, countSet);
                 }
             }
         }else {
@@ -110,6 +115,12 @@ public class XmlReaderRestController {
             }
         }
         return index;
+    }
+
+    @Data
+    private class Counter{
+        String name;
+        Integer size;
     }
 
 }
