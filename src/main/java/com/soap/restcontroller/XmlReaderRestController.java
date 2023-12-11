@@ -92,17 +92,18 @@ public class XmlReaderRestController {
             String value = node.getTextContent().trim();
             if(parent!= null && value!=null && value.length()>0){
 
-
                     String key;
                     if(index>=0 && parent.contains(currentParentNodeArray)){
                         System.out.println(index);
-                        key = parent+'['+index+']';
+                        int indexValue = parent.indexOf("LL") + 2;
+                        key = parent.substring(0, indexValue) + '['+index+']' + parent.substring(indexValue);
                     }else {
                         key = parent;
                     }
                     if(nodeMap.containsKey(key)){
                         index++;
-                        key = parent+'['+index+']';
+                        int indexValue = parent.indexOf("LL") + 2;
+                        key = parent.substring(0, indexValue) + '['+index+']' + parent.substring(indexValue);
                         System.out.println(key);
                     }
                     nodeMap.put(key, value);
