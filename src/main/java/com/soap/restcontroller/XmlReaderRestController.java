@@ -2,6 +2,7 @@ package com.soap.restcontroller;
 
 import lombok.Data;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ import java.util.Map;
 public class XmlReaderRestController {
 
     @PostMapping("/process")
-    public ResponseEntity<?> processXml(@RequestBody String xml) throws SAXException, IOException {
+    public ResponseEntity<?> processXml(@RequestBody String xml) {
         Document doc;
         try {
             DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
@@ -77,10 +78,11 @@ public class XmlReaderRestController {
         } else {
             String value = node.getTextContent().trim();
             if (parent != null && value != null && value.length() > 0) {
-
                 String key;
+                System.out.println("parent" + parent);
+                System.out.println("index" + index);
+                System.out.println("currentParent" + currentParentNodeArray);
                 if (index >= 0 && parent.contains(currentParentNodeArray)) {
-                    System.out.println(index);
                     int indexValue = parent.indexOf("LL") + 2;
                     key = parent.substring(0, indexValue) + '[' + index + ']' + parent.substring(indexValue);
                 } else {
@@ -96,12 +98,6 @@ public class XmlReaderRestController {
             }
         }
         return index;
-    }
-
-    @Data
-    private class Counter {
-        String name;
-        Integer size;
     }
 
 }
