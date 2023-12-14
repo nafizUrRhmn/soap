@@ -1,0 +1,69 @@
+<handData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="finger.xsd">
+
+    <head>
+
+        <handInfo>-23</handInfo>
+
+        <gender>Male</gender>
+
+    </head>
+
+
+
+    <body>
+
+        <fingers>
+
+            <finger id="1">
+
+                <fingerName>-6</fingerName>
+
+                <fingerData>ABCDE</fingerData>
+
+            </finger>
+
+
+
+            <finger id="2">
+
+                <fingerName>LeftIndexFinger</fingerName>
+
+                <fingerData>FGHIJ</fingerData>
+
+            </finger>
+
+
+
+            <finger id="3">
+
+                <fingerName>LeftMiddleFinger</fingerName>
+
+                <fingerData>KLMNO</fingerData>
+
+            </finger>
+
+
+
+            <finger id="4">
+
+                <fingerName>LeftRingFinger</fingerName>
+
+                <fingerData>PQRST</fingerData>
+
+            </finger>
+
+
+
+            <finger id="5">
+
+                <fingerName>LeftLittleFinger</fingerName>
+
+                <fingerData>UVWXYZ</fingerData>
+
+            </finger>
+
+        </fingers>
+
+    </body>
+
+</handData>
