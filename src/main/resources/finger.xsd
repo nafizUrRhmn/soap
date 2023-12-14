@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <xs:element name="handData">
+
+        <xs:complexType>
+
+            <xs:sequence>
+
+                <xs:element name="head">
+
+                    <xs:complexType>
+
+                        <xs:sequence>
+
+                            <xs:element name="handInfo" type="xs:positiveInteger"/>
+
+                            <xs:element name="gender" type="xs:string"/>
+
+                        </xs:sequence>
+
+                    </xs:complexType>
+
+                </xs:element>
+
+                <xs:element name="body">
+
+                    <xs:complexType>
+
+                        <xs:sequence>
+
+                            <xs:element name="fingers">
+
+                                <xs:complexType>
+
+                                    <xs:sequence>
+
+                                        <xs:element name="finger" maxOccurs="unbounded">
+
+                                            <xs:complexType>
+
+                                                <xs:sequence>
+
+                                                    <xs:element name="fingerName" type="xs:positiveInteger"/>
+
+                                                    <xs:element name="fingerData" type="xs:string"/>
+
+                                                </xs:sequence>
+
+                                                <xs:attribute name="id" type="xs:integer" use="required"/>
+
+                                            </xs:complexType>
+
+                                        </xs:element>
+
+                                    </xs:sequence>
+
+                                </xs:complexType>
+
+                            </xs:element>
+
+                        </xs:sequence>
+
+                    </xs:complexType>
+
+                </xs:element>
+
+            </xs:sequence>
+
+        </xs:complexType>
+    </xs:element>
+</xs:schema>
